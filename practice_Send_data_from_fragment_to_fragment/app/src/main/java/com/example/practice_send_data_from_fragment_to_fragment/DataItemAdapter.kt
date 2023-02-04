@@ -1,26 +1,61 @@
 package com.example.practice_send_data_from_fragment_to_fragment
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.practice_send_data_from_fragment_to_fragment.databinding.ItemSpendListBinding
+import java.util.*
 
-class DataItemAdapter(private val dataList: List<Data_item>): RecyclerView.Adapter<DataItemAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val textView: TextView = itemView.findViewById(R.id.item_spend_list_textView)
+class DataItemAdapter(var items: ArrayList<Data_item>) :
+    RecyclerView.Adapter<DataItemAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun OnItemClick(data: Data_item)
+//        fun onClick(v: View, position: Int)
+    }
+
+
+    var itemClickListener: OnItemClickListener? = null //초기값 null값
+
+
+    inner class ViewHolder(val binding: ItemSpendListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+
+            binding.root.setOnClickListener {
+                itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
+
+                Log.d("touch3", adapterPosition.toString())
+
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_spend_list, parent, false)
-        return ViewHolder(view)
+        val binding =
+            ItemSpendListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = dataList.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = dataList[position].text
+
+
+        holder.binding.apply {
+
+            //이미지는 이런식으로 담아야함.
+//            itemSpendListImageView.setImageResource(items[position].img)
+            itemSpendListTextView.text = items[position].text
+//            textScore.text = items[position].score.toString()
+//            textDate.text = items[position].date.toString()
+//            textPrice.text = "₩" + items[position].price.toString() + " / 박"
+//            textViewDifficulty.text= "난이도 ${position+1}"
+
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
     }
 }

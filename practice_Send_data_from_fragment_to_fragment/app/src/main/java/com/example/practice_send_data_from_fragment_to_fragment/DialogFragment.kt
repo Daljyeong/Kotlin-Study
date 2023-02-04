@@ -21,6 +21,7 @@ class DialogFragment : BottomSheetDialogFragment() {
         //방법 (3)
         viewBinding = FragmentDialogBinding.inflate(inflater, container, false)
 
+        //dialog의 '완료' 버튼 눌렀을 때 실행되는 부분
         viewBinding.fragmentDialogButton.setOnClickListener {
             val mainFragment = MainFragment()
             val bundle = Bundle()
