@@ -27,6 +27,9 @@ class DialogFragment : BottomSheetDialogFragment() {
             val bundle = Bundle()
             bundle.putString("dataJ", viewBinding.fragmentDialogEditText.text.toString())
             mainFragment.arguments = bundle
+
+//            (parentFragment as MainFragment).getResulttext()
+
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, mainFragment)

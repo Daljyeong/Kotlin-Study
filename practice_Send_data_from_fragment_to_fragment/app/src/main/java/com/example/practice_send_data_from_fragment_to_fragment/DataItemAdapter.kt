@@ -3,6 +3,7 @@ package com.example.practice_send_data_from_fragment_to_fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice_send_data_from_fragment_to_fragment.databinding.ItemSpendListBinding
 import java.util.*
@@ -40,10 +41,10 @@ class DataItemAdapter(var items: ArrayList<Data_item>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+//        val listposition = items[position]
+//        holder.binding(items[position])
 
         holder.binding.apply {
-
             //이미지는 이런식으로 담아야함.
 //            itemSpendListImageView.setImageResource(items[position].img)
             itemSpendListTextView.text = items[position].text
