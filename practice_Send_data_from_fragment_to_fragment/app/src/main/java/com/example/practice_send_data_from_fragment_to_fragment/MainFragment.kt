@@ -46,10 +46,11 @@ class MainFragment : Fragment() {
 //        dataList.add(Dataitem("aaa"))
 //        dataList.add(Dataitem("aaa"))
 //        dataList.add(Dataitem("aaa"))
-        val data = arguments?.getString("dataJ")
-        val content = arguments?.getString("dataC")
+        val content = arguments?.getString("dataContent") //내용
+        val money = arguments?.getString("dataMoney") //금액 입력
+        val memo = arguments?.getString("dataMemo") //한 줄 메모
         dataList.add(
-            Data_item(data.toString(), content.toString())
+            Data_item(content.toString(), money.toString(), memo.toString())
         )
 //            adapter.items = dataList
         viewBinding.fragmentMainRecyclerView.adapter?.notifyDataSetChanged()

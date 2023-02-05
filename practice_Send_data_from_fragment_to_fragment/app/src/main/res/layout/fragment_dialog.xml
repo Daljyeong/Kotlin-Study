@@ -13,27 +13,27 @@
         android:text="Dialog Fragment"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/fragment_dialog_editText"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_history_main_content_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/fragment_dialog_editText"
+        android:id="@+id/tv_add_history_main_content_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="제목을 입력하세요"
-        app:layout_constraintBottom_toTopOf="@id/fragment_dialog_editText_content"
+        android:hint="내용을 입력하세요"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_history_main_money_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_dialog_text" />
 
     <EditText
-        android:id="@+id/fragment_dialog_editText_content"
+        android:id="@+id/tv_add_history_main_money_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="내용을 입력하세요"
-        app:layout_constraintTop_toBottomOf="@id/fragment_dialog_editText"
+        android:hint="금액을 입력하세요"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_history_main_content_box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/fragment_dialog_button"/>
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_dialog_editText_content" />
+        app:layout_constraintTop_toBottomOf="@id/tv_add_history_main_money_box" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

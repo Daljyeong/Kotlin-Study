@@ -45,8 +45,10 @@ class DataItemAdapter(var items: ArrayList<Data_item>) :
 
             //이미지는 이런식으로 담아야함.
 //            itemSpendListImageView.setImageResource(items[position].img)
-            itemSpendListTitle.text = items[position].text //제목
-            itemSpendListContent.text=items[position].itemContent //내용
+
+            tvSpendListContent.text = items[position].itemContent //내용
+            tvSpendListMoney.text=items[position].itemMoney //금액 입력
+            tvSpendListMemo.text=items[position].itemMemo //한 줄 메모
 //            textScore.text = items[position].score.toString()
 //            textDate.text = items[position].date.toString()
 //            textPrice.text = "₩" + items[position].price.toString() + " / 박"
