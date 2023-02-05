@@ -23,6 +23,7 @@ class DialogFragment : BottomSheetDialogFragment() {
             val mainFragment = MainFragment()
             val bundle = Bundle()
             bundle.putString("dataJ", viewBinding.fragmentDialogEditText.text.toString())
+            bundle.putString("dataC", viewBinding.fragmentDialogEditTextContent.text.toString())
             ((activity as MainActivity).supportFragmentManager
                 .findFragmentById(R.id.frameLayout) as MainFragment).arguments = bundle
             ((activity as MainActivity).supportFragmentManager
@@ -36,6 +37,10 @@ class DialogFragment : BottomSheetDialogFragment() {
 //                .addToBackStack(null)
 //                .commit()
             dismiss()
+
+            //EditText 부분 init
+            viewBinding.fragmentDialogEditText.setText("")
+            viewBinding.fragmentDialogEditTextContent.setText("")
         }
         return viewBinding.root
     }

@@ -33,13 +33,8 @@ class MainFragment : Fragment() {
         val bottomSheetDialogFragment = DialogFragment()
 
         viewBinding.fragmentMainButton.setOnClickListener {
-
             bottomSheetDialogFragment.show(parentFragmentManager, bottomSheetDialogFragment.tag)
-
         }
-
-
-//        initAddData()
 
         return viewBinding.root
     }
@@ -52,7 +47,10 @@ class MainFragment : Fragment() {
 //        dataList.add(Dataitem("aaa"))
 //        dataList.add(Dataitem("aaa"))
         val data = arguments?.getString("dataJ")
-        dataList.add(Data_item(data.toString()))
+        val content = arguments?.getString("dataC")
+        dataList.add(
+            Data_item(data.toString(), content.toString())
+        )
 //            adapter.items = dataList
         viewBinding.fragmentMainRecyclerView.adapter?.notifyDataSetChanged()
     }
