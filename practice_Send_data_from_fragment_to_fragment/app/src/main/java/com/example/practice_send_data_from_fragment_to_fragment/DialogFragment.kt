@@ -1,5 +1,5 @@
 package com.example.practice_send_data_from_fragment_to_fragment
-
+import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,8 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.practice_send_data_from_fragment_to_fragment.databinding.FragmentDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
-
 class DialogFragment : BottomSheetDialogFragment() {
     private lateinit var viewBinding: FragmentDialogBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,18 +23,20 @@ class DialogFragment : BottomSheetDialogFragment() {
             val mainFragment = MainFragment()
             val bundle = Bundle()
             bundle.putString("dataJ", viewBinding.fragmentDialogEditText.text.toString())
-            mainFragment.arguments = bundle
+            ((activity as MainActivity).supportFragmentManager
+                .findFragmentById(R.id.frameLayout) as MainFragment).arguments = bundle
+            ((activity as MainActivity).supportFragmentManager
+                .findFragmentById(R.id.frameLayout) as MainFragment).initAddData()
 
-//            (parentFragment as MainFragment).getResulttext()
-
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, mainFragment)
-                .addToBackStack(null)
-                .commit()
+//            mainFragment.initAddData()
+//
+//            val fragmentManager = requireActivity().supportFragmentManager
+//            fragmentManager.beginTransaction()
+//                .replace(R.id.frameLayout, mainFragment)
+//                .addToBackStack(null)
+//                .commit()
             dismiss()
         }
-
         return viewBinding.root
     }
 }

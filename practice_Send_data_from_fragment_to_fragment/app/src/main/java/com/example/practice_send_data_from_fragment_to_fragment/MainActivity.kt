@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.practice_send_data_from_fragment_to_fragment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
