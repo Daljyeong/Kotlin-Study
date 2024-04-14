@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.week06c_wordbook.component.MainTitle
-import com.example.week06c_wordbook.component.vocList2
+import com.example.week06c_wordbook.component.vocList3
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
@@ -15,6 +15,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
         // 단어 list
 //        vocList()
-        vocList2()
+//        vocList2()
+        vocList3()
     }
 }
