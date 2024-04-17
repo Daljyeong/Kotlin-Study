@@ -22,10 +22,10 @@ fun LoginNavGraph(navController: NavHostController) {
             LoginScreen(navController)
         }
 
-        composable(route = Routes.Welcome.route + "/{userID}",
+        composable(route = Routes.Welcome.route + "/{userID}", // userID가 넘어와야 welcome 루트가 생성됨
             arguments = listOf(
                 navArgument(name = "userID") {
-                    type = NavType.StringType
+                    type = NavType.StringType // String type이라고 타입을 지정해줌
                 }
             )
         ) {

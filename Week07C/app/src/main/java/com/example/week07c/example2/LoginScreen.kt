@@ -50,7 +50,7 @@ fun LoginScreen(navController: NavHostController) {
         )
 
         OutlinedTextField(value = userID,
-            onValueChange = { userID = it },
+            onValueChange = { userID = it }, // 계속 recomposition이 일어나도록 해줌
             label = { Text("아이디") }
         )
 
@@ -58,12 +58,14 @@ fun LoginScreen(navController: NavHostController) {
             value = userPasswd,
             onValueChange = { userPasswd = it },
             label = { Text("Enter password") },
-            visualTransformation = PasswordVisualTransformation(),
+            visualTransformation = PasswordVisualTransformation(), // 입력 시 자동으로 비번처럼 바꿔주는 옵션
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
 
         Button(onClick = {
-
+            // 실습
+            if (loginresult)
+                navController.navigate(Routes.Welcome.route + "/$userID")
         }) {
             Text(text = "로그인")
         }
