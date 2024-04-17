@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.week07.example1.NavGraph1
+import com.example.week07c.example2.LoginNavGraph
 import com.example.week07c.ui.theme.Week07CTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavGraph1(navController = navController)
+//                    NavGraph1(navController = navController)
+                    LoginNavGraph(navController)
                 }
             }
         }
