@@ -35,8 +35,21 @@ fun LoginNavGraph(navController: NavHostController) {
             )
         }
 
-        composable(route = Routes.Register.route) {
-
+        composable(route = Routes.Register.route + "/{userID}/{userPasswd}", arguments = listOf(
+            // 실습
+            navArgument(name = "userID") {
+                type = NavType.StringType // String type이라고 타입을 지정해줌
+            },
+            navArgument(name = "userPasswd") {
+                type = NavType.StringType // String type이라고 타입을 지정해줌
+            }
+        )) {
+            // 실습
+            Register(
+                navController = navController,
+                userID = it.arguments?.getString("userID"),
+                userPasswd = it.arguments?.getString("userPasswd")
+            )
         }
     }
 

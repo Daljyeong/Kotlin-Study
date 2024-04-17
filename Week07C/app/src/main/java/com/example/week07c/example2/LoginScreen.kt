@@ -66,6 +66,8 @@ fun LoginScreen(navController: NavHostController) {
             // 실습
             if (loginresult)
                 navController.navigate(Routes.Welcome.route + "/$userID")
+            else
+                navController.navigate(Routes.Register.route + "/$userID/$userPasswd")
         }) {
             Text(text = "로그인")
         }
