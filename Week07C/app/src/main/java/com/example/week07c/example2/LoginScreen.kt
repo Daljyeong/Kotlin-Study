@@ -66,8 +66,12 @@ fun LoginScreen(navController: NavHostController) {
             // 실습
             if (loginresult)
                 navController.navigate(Routes.Welcome.route + "/$userID")
-            else
-                navController.navigate(Routes.Register.route + "/$userID/$userPasswd")
+            else {
+                if (!userID.isBlank())
+                    navController.navigate(Routes.Register.route + "?userid=$userID&passwd=$userPasswd")
+                else // 아무런 입력이 없는 상태에서 Register 화면으로 넘어가야하는 경우
+                    navController.navigate(Routes.Register.route)
+            }
         }) {
             Text(text = "로그인")
         }
