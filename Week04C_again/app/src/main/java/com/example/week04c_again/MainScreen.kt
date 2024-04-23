@@ -77,9 +77,9 @@ fun IconWithBadge(
     }
 }
 
-// data class (6주차 실습)
+// data class (4주차 p.22)
 
-// ViewModel class (5주차 p.21)
+// ViewModel class (4주차 p.22)
 
 @Composable
 fun MainScreen() {
