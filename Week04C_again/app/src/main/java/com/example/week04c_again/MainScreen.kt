@@ -15,10 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.week04c_again.R
 
 // Image & slotBtn을 보여주는 함수 (일종의 큰 틀)
@@ -78,26 +77,47 @@ fun IconWithBadge(
 }
 
 // data class (4주차 p.22)
+data class ImgData(var img: Int, var counter: Int)
 
-// ViewModel class (4주차 p.22)
+// ViewModel class (4주차 p.22) => 상태를 캐시해, 화면 회전/구성 변경되어도 데이터가 유지됨
+class ImgViewModel : ViewModel() {
+    var imglist = mutableStateListOf<ImgData>()
+        private set // 밖에서의 변경을 금지하기 위해 set을 private로 설정
+
+    // 객체가 만들어질 때 딱 한 번만 호출되는 초기화 부분
+    init {
+        imglist.add(ImgData(R.drawable.image01, 10))
+        imglist.add(ImgData(R.drawable.image02, 20))
+        imglist.add(ImgData(R.drawable.image03, 30))
+        imglist.add(ImgData(R.drawable.image01, 40))
+    }
+
+    // index에 해당하는 위치의 counter를 증가시키는 함수
+    fun increaseCount(index: Int) {
+//        imglist[index].counter = imglist[index].counter + 1; // 이렇게 작성하면 작동 안됨
+
+        // 객체의 일부 속성만 바뀔 때 recomposition이 이뤄지지 않음 => 객체 자체를 copy해줘야 함
+        imglist[index] = imglist[index].copy(counter = imglist[index].counter + 1)
+    }
+}
 
 @Composable
-fun MainScreen() {
+fun MainScreen(imgViewModel: ImgViewModel = viewModel()) {
     var scrollState = rememberScrollState() // scroll 정보를 담고 있음
 
-    // counter state 선언
-    var img1 by rememberSaveable {
-        mutableStateOf(10)
-    }
-    var img2 by rememberSaveable {
-        mutableStateOf(20)
-    }
-    var img3 by rememberSaveable {
-        mutableStateOf(30)
-    }
-    var img4 by rememberSaveable {
-        mutableStateOf(40)
-    }
+    // counter state 선언 => ViewModel을 사용하게 되면 기존에 rememberSaveable을 사용하던 방법은 필요없어짐
+//    var img1 by rememberSaveable {
+//        mutableStateOf(10)
+//    }
+//    var img2 by rememberSaveable {
+//        mutableStateOf(20)
+//    }
+//    var img3 by rememberSaveable {
+//        mutableStateOf(30)
+//    }
+//    var img4 by rememberSaveable {
+//        mutableStateOf(40)
+//    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -105,17 +125,25 @@ fun MainScreen() {
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        ImageWithSlot(imgId = R.drawable.image01) {
-            BtnWithIcon(counter = img1, onClick = { img1++ })
+        ImageWithSlot(imgId = imgViewModel.imglist[0].img) {
+            BtnWithIcon(
+                counter = imgViewModel.imglist[0].counter,
+                onClick = { imgViewModel.increaseCount(0) })
         }
-        ImageWithSlot(imgId = R.drawable.image02) {
-            IconWithBadge(counter = img2, onClick = { img2++ })
+        ImageWithSlot(imgId = imgViewModel.imglist[1].img) {
+            IconWithBadge(
+                counter = imgViewModel.imglist[1].counter,
+                onClick = { imgViewModel.increaseCount(1) })
         }
-        ImageWithSlot(imgId = R.drawable.image03) {
-            BtnWithIcon(counter = img3, onClick = { img3++ })
+        ImageWithSlot(imgId = imgViewModel.imglist[2].img) {
+            BtnWithIcon(
+                counter = imgViewModel.imglist[2].counter,
+                onClick = { imgViewModel.increaseCount(2) })
         }
-        ImageWithSlot(imgId = R.drawable.image01) {
-            BtnWithIcon(counter = img4, onClick = { img4++ })
+        ImageWithSlot(imgId = imgViewModel.imglist[3].img) {
+            BtnWithIcon(
+                counter = imgViewModel.imglist[3].counter,
+                onClick = { imgViewModel.increaseCount(3) })
         }
     }
 }
